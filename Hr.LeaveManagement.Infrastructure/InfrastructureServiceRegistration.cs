@@ -1,4 +1,9 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Hr.LeaveManagement.Infrastructure.EmailService;
+using Hr.LeaveManagement.Infrastructure.Logging;
+using HR.LeaveManagement.Application.Contracts.Email;
+using HR.LeaveManagement.Application.Contracts.Logging;
+using HR.LeaveManagement.Application.Models.Email;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -12,8 +17,12 @@ namespace Hr.LeaveManagement.Infrastructure
 	{
         public static IServiceCollection ConfigureInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
 		{
-			return services;
+			services.Configure<EmailSettings>(configuration.GetSection("EmailSettings"));
+			services.AddTransient<IEmailSender, EmailSender>();
 
+			services.AddScoped(typeof(IAppLogger<>),typeof(LoggerAdapter<>));
+
+			return services;
 		}
     }
 }
