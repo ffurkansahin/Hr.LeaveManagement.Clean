@@ -14,7 +14,7 @@ namespace Hr.LeaveManagement.Persistence
 {
 	public static class PersistenceServiceRegistration
 	{
-		public static IServiceCollection AddPersistenceServices(this ServiceCollection services, IConfiguration configuration)
+		public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
 		{
 			services.AddDbContext<HrDbContext>(opt =>
 			{
