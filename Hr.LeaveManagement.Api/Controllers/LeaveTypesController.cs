@@ -22,7 +22,7 @@ namespace Hr.LeaveManagement.Api.Controllers
 		}
         // GET: api/<LeaveTypesController>
         [HttpGet]
-		public async Task<List<LeaveTypeDto>> Get()
+		public async Task<List<LeaveTypeDto>> GetAll()
 		{
 			var leaveTypes = await _mediator.Send(new GetLeaveTypesQuery());
 			return leaveTypes;
@@ -30,7 +30,7 @@ namespace Hr.LeaveManagement.Api.Controllers
 
 		// GET api/<LeaveTypesController>/5
 		[HttpGet("{id}")]
-		public async Task<ActionResult<LeaveTypeDetailsDto>> Get(int id)
+		public async Task<ActionResult<LeaveTypeDetailsDto>> GetById(int id)
 		{
 			var leaveTypeDetails = await _mediator.Send(new GetLeaveTypeDetailsQuery(id));
 			return Ok(leaveTypeDetails);
